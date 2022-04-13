@@ -1,7 +1,14 @@
 {
   "name": "zccomponent",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
+  "title": "Ant Design",
   "description": "> TS - UI组件库",
+    "keywords": [
+    "UI",
+    "React",
+    "zcCom",
+    "React components"
+  ],
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.3.1",
@@ -59,14 +66,15 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.dev.conf.js",
-    "analyzer": "cross-env Analyzer=on npm run build && webpack-bundle-analyzer --port 8888 ./dist/analyzer.json"
+    "analyzer": "cross-env Analyzer=on npm run build && webpack-bundle-analyzer --port 8888 ./dist/analyzer.json",
+    "npm:publish":"npm run build && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZhChen7/zcComponent.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "zhouchen",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ZhChen7/zcComponent/issues"
   },

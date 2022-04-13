@@ -17,28 +17,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          config.build.isDevelopment
-            ? 'style-loader'
-            : {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                publicPath: `${config.build.assetsHost}/`
-              }
-            },
+          'style-loader',
           { loader: 'css-loader' }
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          config.build.isDevelopment
-            ? 'style-loader'
-            : {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                publicPath: `${config.build.assetsHost}/`
-              }
-            },
+          'style-loader',
           { loader: 'css-loader' },
           {
             loader: 'postcss-loader',

@@ -55,6 +55,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     })
   ],
   devServer: {
+    // contentBase: path.join(__dirname, '../src/'),
     static: {
       directory: path.join(__dirname, 'public'),
     },
