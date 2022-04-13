@@ -1,0 +1,23 @@
+.clip-image {
+  position: relative;
+  display: inline-block;
+
+  &--shadow {
+    filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+  }
+
+  & > img {
+    object-fit: cover;
+    clip-path: url('#svgClipPath');
+  }
+
+  &__border {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &--shadow {
+      filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+    }
+  }
+}

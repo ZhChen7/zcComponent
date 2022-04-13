@@ -1,0 +1,247 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-pagination {
+  $prefixCls: '.mi-pagination';
+
+  text-align: center;
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &::after {
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    content: ' ';
+  }
+
+  &-item {
+    display: inline-block;
+
+    @include responsive((
+      'width': (null, 30px, 30px, v4(40), 40px),
+      'height': (null, 36px, 36px, v4(48), 48px),
+      'line-height': (null, 36px, 36px, v4(48), 48px),
+    ));
+
+    padding: 3px 0;
+    margin: 0 7px;
+    font-weight: 400;
+    outline: 0;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+
+    a {
+      display: block;
+      padding: 0 6px;
+      color: var(--text-base);
+      transition: none;
+
+      @include responsive((
+        'font-size': (null, 16px, 16px, v4(20), 20px),
+      ));
+
+      font-weight: 400;
+
+      &:hover {
+        text-decoration: none;
+        color: var(--text-secondary);
+      }
+    }
+
+    &:hover {
+      transition: all 0.3s;
+
+      a {
+        color: var(--text-secondary);
+      }
+    }
+    /* stylelint-disable no-descending-specificity */
+    &-active {
+      a {
+        color: var(--text-primary);
+      }
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  &-jump-prev,
+  &-jump-next {
+    outline: 0;
+
+    @include responsive((
+      'height': (null, 36px, 36px, v4(48), 48px),
+      'width': (null, 36px, 36px, v4(48), 48px),
+    ));
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+    #{$prefixCls}-item-container {
+      position: relative;
+
+      #{$prefixCls}-item-link-icon {
+        letter-spacing: -1px;
+        opacity: 0;
+        transition: all 0.2s;
+      }
+
+      #{$prefixCls}-item-link-icon-svg {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+      }
+
+      #{$prefixCls}-item-ellipsis {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        margin: auto;
+        letter-spacing: 2px;
+        text-align: center;
+        text-indent: 0.13em;
+        opacity: 1;
+        transition: all 0.2s;
+      }
+    }
+
+    &:hover {
+      a {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  &-prev,
+  &-jump-prev,
+  &-jump-next {
+    margin-right: 8px;
+  }
+
+  &-prev,
+  &-next,
+  &-jump-prev,
+  &-jump-next {
+    display: inline-block;
+
+    @include responsive((
+      'height': (null, 36px, 36px, v4(48), 48px),
+      'width': (null, 36px, 36px, v4(48), 48px),
+      'line-height': (null, 36px, 36px, v4(48), 48px),
+    ));
+
+    padding: 3px 0;
+    margin: 0 7px;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    @include responsive((
+      'font-size': (null, 16px, 16px, v4(20), 20px),
+    ));
+  }
+
+  &-prev,
+  &-next {
+    outline: 0;
+
+    a {
+      user-select: none;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #{$prefixCls}-item-link ,.micon {
+      @include responsive((
+        'font-size': (null, 36px, 36px, v4(48), 48px),
+      ));
+    }
+
+    &:hover {
+      #{$prefixCls}-item-link .micon {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  // ============================ Disabled ============================
+  &-disabled {
+    &:hover {
+      a,
+      #{$prefixCls}-item-link .micon {
+        color: #d0d0d0;
+      }
+    }
+
+    #{$prefixCls}-item {
+      a,
+      i {
+        background: transparent;
+        border: none;
+        cursor: not-allowed;
+      }
+
+      &-active {
+        border-color: transparent;
+      }
+
+      &-active a {
+        color: var(--text-secondary);
+      }
+    }
+
+    #{$prefixCls}-item-link {
+      &,
+      &:hover {
+        cursor: not-allowed;
+      }
+
+      .micon {
+        color: #d0d0d0;
+        cursor: not-allowed;
+      }
+    }
+
+    #{$prefixCls}-jump-prev:hover,
+    #{$prefixCls}-jump-next:hover {
+      #{$prefixCls}-item-link-icon {
+        opacity: 0;
+      }
+
+      #{$prefixCls}-item-ellipsis {
+        opacity: 1;
+      }
+    }
+
+    &#{$prefixCls}-prev,
+    &#{$prefixCls}-next {
+      &:hover {
+        background: none;
+        color: #d0d0d0;
+      }
+
+      &:hover #{$prefixCls}-item-link {
+        color: #d0d0d0;
+      }
+    }
+  }
+}

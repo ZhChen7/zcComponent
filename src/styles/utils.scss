@@ -1,0 +1,15 @@
+/**
+ * function
+ */
+
+// 给模态框固定下方内容使用
+body {
+  &.body--overflow-hidden {
+    overflow: hidden;
+  }
+
+  // Modal展开时，防止背景滚动（样式分开写，防止多层弹窗统一清除）
+  &.mi-modal__Body--overflow-hidden {
+    overflow: hidden;
+  }
+}

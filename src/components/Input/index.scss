@@ -1,0 +1,83 @@
+.mi-input {
+  width: 240px;
+  height: 40px;
+  border: 1px solid #dbdbdb;
+  border-radius: 14px;
+  font-size: 14px;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+
+  & > input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: unset;
+    color: #191919;
+    background-color: inherit;
+    flex: 1;
+
+    &::placeholder {
+      color: #d0d0d0;
+    }
+  }
+
+  &--large {
+    height: 48px;
+    border-radius: 16px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+
+  &--small {
+    height: 24px;
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  &--fullwidth {
+    width: 100%;
+  }
+
+  &--hover {
+    border-color: #898989;
+
+    & > input::placeholder {
+      color: #898989;
+    }
+  }
+
+  &--active {
+    border-color: #ff6900;
+  }
+
+  &--disabled {
+    border: 1px solid #d0d0d0;
+    background-color: #f3f3f3;
+    cursor: not-allowed;
+  }
+
+  // &--with-prefix {
+  //   margin-right: 1em;
+  // }
+
+  // &--with-suffix {
+  //   margin-left: 2em;
+  // }
+
+  &--prefix {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
+  &--suffix {
+    display: flex;
+    margin-left: 0.5em;
+  }
+}

@@ -1,0 +1,141 @@
+.mi-loading {
+  width: 100vw;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  $prefix: 'mi-loading';
+
+  .#{$prefix}__animation {
+    position: relative;
+    margin: 0 auto;
+    width: 4px;
+    height: 20px;
+    background: var(--background-loader);
+    transition: background-color ease 250ms;
+    overflow: visible;
+    animation-delay: 0s;
+    transform: scale(1, 1);
+
+    &,
+    &::before,
+    &::after {
+      transform-origin: 50% 50%;
+      animation-name: loader;
+      animation-duration: 0.3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate-reverse;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      height: 20px;
+      content: '';
+      background-color: var(--background-loader);
+      transition: background-color ease 250ms;
+    }
+
+    &::before {
+      margin: -10px 0 0 -10px;
+      animation-delay: 0.25s;
+      transform: scale(1, 0.3);
+    }
+
+    &::after {
+      margin: -10px 0 0 6px;
+      animation-delay: 0.5s;
+      transform: scale(1, 0.5);
+    }
+
+    &--white {
+      &,
+      &::before,
+      &::after {
+        background: var(--background-light);
+      }
+    }
+
+    &--gray {
+      &,
+      &::before,
+      &::after {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  @keyframes loader {
+    0% {
+      transform: scale(1, 0.5);
+      opacity: 0.2;
+    }
+
+    100% {
+      transform: scale(1, 1);
+      opacity: 1;
+    }
+  }
+
+  // 翻页加载更多样式
+  &.#{$prefix}--scroll {
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
+
+    .#{$prefix}__animation {
+      width: 4px;
+      height: 20px;
+
+      &::before,
+      &::after {
+        width: 4px;
+        height: 20px;
+      }
+
+      &::before {
+        margin: -10px 0 0 -10px;
+      }
+
+      &::after {
+        margin: -10px 0 0 6px;
+      }
+    }
+  }
+
+  // 父级元素内加载样式
+  &.#{$prefix}--inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  // 全屏遮罩加载样式
+  &.#{$prefix}--mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    background-color: var(--background-mask-a65);
+
+    .#{$prefix}__animation {
+      position: absolute;
+    }
+
+    // 下方提示性文字
+    .#{$prefix}__title {
+      user-select: none;
+      padding-top: 90px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1;
+      color: var(--content-light);
+      margin: auto -100%;
+    }
+  }
+}

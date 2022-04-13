@@ -1,0 +1,12 @@
+.mi-radio__group {
+  display: flex;
+  flex-wrap: wrap;
+
+  &--vertical {
+    flex-direction: column;
+
+    & .radio__custom {
+      margin-right: 0;
+    }
+  }
+}

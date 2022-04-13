@@ -1,0 +1,108 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-checkbox__item {
+  @include responsive((
+    'font-size': (12px, 12px, v3(16), v4(24), 24px),
+  ));
+
+  &--button {
+    border: 1px solid var(--border-base);
+
+    @include responsive((
+      'padding': (7px 21px, 4px 16px, 12px 22px, 12px 30px, 12px 30px),
+      'border-radius': (8px, 8px, 12px, 14px, 14px)
+    ));
+  }
+
+  &--card {
+    border: 1px solid var(--border-base);
+    border-radius: 5px;
+
+    @include responsive((
+      'padding': (7px 21px, 4px 16px, 8px 22px, 8px 30px, 8px 30px),
+    ));
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    cursor: pointer;
+
+    &.mi-checkbox__item--default {
+      cursor: default;
+    }
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &.mi-checkbox__item--button:hover,
+    &.mi-checkbox__item--card:hover {
+      border: 1px solid var(--border-primary);
+    }
+  }
+
+  .checkbox__icon,
+  .checkbox__content {
+    cursor: pointer;
+  }
+
+  .checkbox__icon {
+    @include responsive((
+      'font-size': (12px, 12px, v3(16), v4(24), 24px),
+    ));
+  }
+
+  &--left {
+    .checkbox__icon {
+      margin-right: 2px;
+    }
+  }
+
+  &--top {
+    flex-direction: column;
+  }
+
+  &--right {
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    .checkbox__icon {
+      margin-left: 2px;
+    }
+  }
+
+  &--bottom {
+    flex-direction: column-reverse;
+  }
+
+  .checkbox__input {
+    display: none;
+
+    &:checked + .checkbox-wrapper {
+      color: var(--text-primary);
+    }
+
+    &:checked + .mi-checkbox__item--button,
+    &:checked + .mi-checkbox__item--card {
+      border: 1px solid var(--border-primary);
+    }
+
+    &:disabled + .checkbox-wrapper {
+      color: var(--brand-grey-40);
+      cursor: not-allowed;
+
+      .checkbox__icon,
+      .checkbox__content {
+        cursor: not-allowed;
+      }
+    }
+
+    &:disabled + .mi-checkbox__item--button,
+    &:disabled + .mi-checkbox__item--card {
+      border: 1px solid var(--brand-grey-40);
+      background-color: var(--brand-grey-20);
+    }
+  }
+}

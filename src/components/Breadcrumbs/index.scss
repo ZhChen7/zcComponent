@@ -1,0 +1,50 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-breadcrumbs {
+  color: var(--text-base);
+  background: var(--background-white);
+
+  @include responsive((
+    'height':(null,14px,24px,24px,24px),
+    'line-height':(null,14px,24px,24px,24px),
+    'font-size':(null,12px,16px,16px,16px),
+  ));
+
+  $prefixCls: mi-breadcrumbs;
+
+  &-link {
+    a {
+      color: var(--text-secondary);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--link-active);
+      }
+    }
+
+    h1 {
+      margin: 0;
+      display: inline-block;
+
+      @include responsive((
+        'font-size':(null,12px,16px,16px,16px),
+      ));
+
+      font-weight: 400;
+    }
+  }
+
+  &-separator {
+    @include responsive((
+      'margin':(null,12px,16px,16px,16px),
+    ));
+
+    color: var(--text-secondary);
+  }
+
+  .container > span:last-child {
+    .#{$prefixCls}-separator {
+      display: none;
+    }
+  }
+}

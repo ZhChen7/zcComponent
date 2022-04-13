@@ -1,0 +1,105 @@
+@import '@/src/styles/mixins.scss';
+
+.steps-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+
+  .steps-icon {
+    background: transparent;
+
+    @include responsive((
+      'font-size': (null, v2(40), v4(30), v4(30), 30px),
+      'padding':(null, v2(10), v4(6), v4(6), 6px),
+    ));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .steps-icon::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include responsive((
+      'font-size': (null, v2(40), v4(30), v4(30), 30px),
+    ));
+  }
+
+  .icon-done {
+    color: var(--text-primary);
+  }
+
+  .icon-done span {
+    color: transparent;
+  }
+
+  .icon-active {
+    color: var(--text-reverse);
+  }
+
+  .icon-empty {
+    color: var(--brand-grey-40);
+
+    &::before {
+      color: var(--brand-grey-40);
+    }
+  }
+
+  .icon-text {
+    z-index: 1;
+
+    @include responsive((
+      'margin': (null, v2(10), v4(10), v4(10), 10px),
+      'font-size': (null, v2(20), v4(15), v4(15), 15px),
+    ));
+  }
+
+  .steps-title {
+    @include responsive((
+      'font-size': (null, v2(16), v4(18), v4(18), 18px),
+    ));
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .steps-done,
+  .steps-active {
+    color: var(--text-primary);
+  }
+
+  .steps-empty {
+    color: var(--brand-grey-40);
+  }
+
+  .line {
+    height: 1px;
+    width: 9999px;
+
+    @include responsive((
+      'margin':(v4(30), v4(30), v4(30), v4(30), 30px)
+    ));
+  }
+
+  .done-line {
+    background: var(--background-primary);
+  }
+
+  .empty-line {
+    background: var(--brand-grey-40);
+  }
+}

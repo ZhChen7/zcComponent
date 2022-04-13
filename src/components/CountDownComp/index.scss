@@ -1,0 +1,49 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-count-down {
+  --icon-background: #191919;
+  --icon-text-color: #fff;
+  $prefix: 'mi-count-down';
+
+  @include responsive((
+    '--icon-size': (22px, 22px, v3(32), v4(40), 40px),
+    '--font-size': (12px, 12px, v3(20), v4(24), 24px),
+    '--colon-margin': (5px, 5px, v3(6), v4(8), 8px),
+  ));
+
+  // 文本型
+  &--text {
+    display: inline-block;
+  }
+
+  // 图标型
+  &--icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .#{$prefix}__time {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      font-size: var(--font-size);
+      color: var(--icon-text-color);
+      background-color: var(--icon-background);
+      clip-path: url('#svgClipPath');
+    }
+
+    .#{$prefix}__colon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      opacity: 0.6;
+      height: var(--icon-size);
+      font-size: var(--font-size);
+      color: var(--icon-background);
+      padding: 0 var(--colon-margin);
+    }
+  }
+}

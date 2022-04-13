@@ -1,0 +1,238 @@
+/*
+  ## 文字方向LTR 和 RTL
+*/
+@mixin ltrAndRtl($property, $ltr-value, $rtl-value) {
+  #{$property}: $ltr-value;
+
+  [dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+/*
+  ## 属性对应的参数（mobile, tablet, laptop, desktop, widescreen）
+  ## mobile: 请将设计稿的宽度设置为 360px 后再取值
+  ## tablet: 请使用 1024px 宽度的设计稿
+  ## laptop: 请使用 1440px 宽度的设计稿
+  ## desktop: 请使用宽度为 1920px 的设计稿
+  ## widescreen: 请使用宽度为 2560px 的设计稿
+  ## 如不需要此参数，传入 null 占位即可
+  ## 使用方法：
+    @include responsive((
+      'width': (86%, 84%, 80%, 1200px, 2560px),
+      'color': (red, orange, green, white, blue),
+      'font-size': (12px, 14px, 16px, 18px, 20px),
+      'position': (absolute, null, null, null, null),
+      'right': (8px, 32px, -32px, -32px, -32px, 'ltr'), // 仅在 ltr 启用
+      'left': (8px, 32px, -32px, -32px, -32px, 'rtl'), // 仅在 rtl 启用
+    ));
+*/
+@mixin responsive($properties) {
+  $keys: map-keys($map: $properties);
+  $mobile-values: ();
+  $tablet-values: ();
+  $laptop-values: ();
+  $desktop-values: ();
+  $widescreen-values: ();
+
+  // 将配置参数聚合，写一个过渡属性
+  // transition: #{$keys} ease 0.25s; // 需要的地方自行添加
+
+  // 整理各端样式
+  @each $property, $values in $properties {
+    @if length($values) == 6 {
+      $mobile-values: append($mobile-values, ($property, nth($values, 1), nth($values, 6)));
+      $tablet-values: append($tablet-values, ($property, nth($values, 2), nth($values, 6)));
+      $laptop-values: append($laptop-values, ($property, nth($values, 3), nth($values, 6)));
+      $desktop-values: append($desktop-values, ($property, nth($values, 4), nth($values, 6)));
+      $widescreen-values: append($widescreen-values, ($property, nth($values, 5), nth($values, 6)));
+    }
+
+    @else {
+      $mobile-values: append($mobile-values, ($property, nth($values, 1), null));
+      $tablet-values: append($tablet-values, ($property, nth($values, 2), null));
+      $laptop-values: append($laptop-values, ($property, nth($values, 3), null));
+      $desktop-values: append($desktop-values, ($property, nth($values, 4), null));
+      $widescreen-values: append($widescreen-values, ($property, nth($values, 5), null));
+    }
+  }
+
+  // 在当前范围内输出样式
+  @include mobile {
+    @each $property, $value, $isRtl in $mobile-values {
+      @if $property == 'font-size' {
+        #{$property}: #{$value};
+      }
+
+      @include outputStyle($property, $value, $isRtl);
+    }
+  }
+
+  @include tablet {
+    @each $property, $value, $isRtl in $tablet-values {
+      @include outputStyle($property, $value, $isRtl);
+    }
+  }
+
+  @include laptop {
+    @each $property, $value, $isRtl in $laptop-values {
+      @include outputStyle($property, $value, $isRtl);
+    }
+  }
+
+  @include desktop {
+    @each $property, $value, $isRtl in $desktop-values {
+      @include outputStyle($property, $value, $isRtl);
+    }
+  }
+
+  @include widescreen {
+    @each $property, $value, $isRtl in $widescreen-values {
+      @include outputStyle($property, $value, $isRtl);
+    }
+  }
+}
+
+/*
+  各终端处理函数
+*/
+@mixin outputStyle($property, $value, $isRtl) {
+  @if $isRtl == 'rtl' {
+    [dir=rtl] & {
+      #{$property}: minimum($property, $value);
+    }
+  }
+
+  @else if $isRtl == 'ltr' {
+    [dir=ltr] & {
+      #{$property}: minimum($property, $value);
+    }
+  }
+
+  @else {
+    #{$property}: minimum($property, $value);
+  }
+}
+
+/*
+  处理字号最小值
+*/
+@function minimum($property, $value) {
+  $result: $value;
+
+  @if ($value and $property == 'font-size' and unit($value) == 'vw') {
+    $result: unquote('max(#{$value}, 12px)');
+  }
+
+  @return $result;
+}
+
+/*
+  ##Device = Smartphones Mobiles (portrait)
+  ## 因无法聚合样式，只在覆盖特定参数时使用
+*/
+@mixin mobile {
+  @media screen and (max-width: 720px) {
+    @content;
+  }
+}
+
+/*
+  ##Device = Tablets, iPads (landscape)
+  ## 因无法聚合样式，只在覆盖特定参数时使用
+*/
+@mixin tablet {
+  @media screen and (min-width: 721px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+/*
+  ##Device = Laptops, Desktops
+  ## 因无法聚合样式，只在覆盖特定参数时使用
+*/
+@mixin laptop {
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    @content;
+  }
+}
+
+/*
+  ##Device = Desktops (normal resolution)
+  ## 因无法聚合样式，只在覆盖特定参数时使用
+*/
+@mixin desktop {
+  @media screen and (min-width: 1441px) and (max-width: 1920px) {
+    @content;
+  }
+}
+
+/*
+  ##Device = Desktops (higher resolution)
+  ## 因无法聚合样式，只在覆盖特定参数时使用
+*/
+@mixin widescreen {
+  @media screen and (min-width: 1921px) {
+    @content;
+  }
+}
+
+/*
+  px 转换 vw 函数
+ */
+@function v1($px) {
+  @return $px / 360 * 100vw;
+}
+
+@function v2($px) {
+  @return $px / 1024 * 100vw;
+}
+
+@function v3($px) {
+  @return $px / 1440 * 100vw;
+}
+
+@function v4($px) {
+  @return $px / 1920 * 100vw;
+}
+
+@function v5($px) {
+  @return $px / 2560 * 100vw;
+}
+
+/*
+  超过指定行数，使用省略号展示
+ */
+@mixin ellipsisText($lines: 2, $direction: vertical) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  /* stylelint-disable */
+  /* autoprefixer: off */
+  display: box;
+  display: -webkit-box;
+  -webkit-box-orient: $direction;
+  -webkit-line-clamp: $lines;
+  /* stylelint-enable */
+}
+
+/*
+  Hover样式 - 卡片阴影
+ */
+@mixin hoverCardShadow($disableTransition: false) {
+  @if ($disableTransition != true) {
+    transition: box-shadow ease 0.25s;
+  }
+
+  &:hover {
+    @include responsive((
+      'box-shadow': (
+        null,
+        0 v4(6) v4(14) 0 rgba(0, 0, 0, 0.08),
+        0 v4(6) v4(14) 0 rgba(0, 0, 0, 0.08),
+        0 v4(6) v4(14) 0 rgba(0, 0, 0, 0.08),
+        0 6px 14px 0 rgba(0, 0, 0, 0.08),
+      ),
+    ));
+  }
+}

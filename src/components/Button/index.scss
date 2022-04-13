@@ -1,0 +1,356 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-btn {
+  // 公共参数
+  @include responsive((
+    '--btn-padding': (8px 20px, 10px 16px, v3(12) v3(24), v4(12) v4(40), 12px 40px),
+    '--btn-font-size': (12px, v2(16), 16px, v4(24), 24px),
+    '--btn-border-radius': (8px, 8px, 12px, 14px, 14px)
+  ));
+
+  --btn-text-base: var(--text-base);
+  --btn-background-white: var(--background-white);
+  --btn-background-black: var(--background-black);
+  --btn-background-primary: var(--background-primary);
+  --btn-ellipsis-lines: 1;
+  --btn-ellipsis-direction: vertical;
+  --btn-background-color: transparent;
+  --link-text-decoration: underline;
+
+  // 公共样式
+  .micon-link-arrow {
+    display: none;
+  }
+
+  @mixin defaultButton() {
+    --btn-background-color: transparent;
+
+    border: 1px solid var(--border-secondary);
+
+    &:hover {
+      --btn-text-base: #666;
+
+      border-color: #666;
+    }
+
+    &.#{$btn}--highlight-pc {
+      @include responsive((
+        '--btn-text-base': (null, var(--text-reverse), var(--text-reverse), var(--text-reverse), var(--text-reverse)),
+        '--btn-background-color': (null, var(--btn-background-primary), var(--btn-background-primary), var(--btn-background-primary), var(--btn-background-primary)),
+        'border': (null, 1px solid transparent, 1px solid transparent, 1px solid transparent, 1px solid transparent),
+      ));
+
+      &:hover {
+        @include responsive((
+          '--btn-text-base': (null, var(--text-reverse), var(--text-reverse), var(--text-reverse), var(--text-reverse)),
+          '--btn-background-color': (null, #ff781a, #ff781a, #ff781a, #ff781a),
+          'border-color': (null, transparent, transparent, transparent, transparent),
+        ));
+      }
+    }
+
+    &.#{$btn}--highlight-m {
+      @include mobile {
+        --btn-text-base: var(--text-reverse);
+        --btn-background-color: var(--btn-background-primary);
+
+        border: 1px solid transparent;
+      }
+
+      &:hover {
+        @include mobile {
+          --btn-text-base: var(--text-reverse);
+          --btn-background-color: #ff781a;
+
+          border-color: transparent;
+        }
+      }
+    }
+
+    &.#{$btn}--dark {
+      --btn-text-base: var(--text-reverse);
+
+      border-color: var(--text-revers);
+
+      &:hover {
+        --btn-text-base: #d0d0d0;
+
+        border-color: #d0d0d0;
+      }
+    }
+  }
+
+  @mixin primaryButton {
+    --btn-text-base: var(--text-reverse);
+    --btn-background-color: var(--btn-background-black);
+
+    border: 1px solid transparent;
+
+    &:hover {
+      --btn-background-color: #444;
+    }
+
+    &.#{$btn}--highlight-pc {
+      @include responsive((
+        '--btn-background-color': (null, var(--btn-background-primary), var(--btn-background-primary), var(--btn-background-primary), var(--btn-background-primary)),
+      ));
+
+      &:hover {
+        @include responsive((
+          '--btn-background-color': (null, #ff781a, #ff781a, #ff781a, #ff781a),
+        ));
+      }
+    }
+
+    &.#{$btn}--highlight-m {
+      @include mobile {
+        --btn-background-color: var(--btn-background-primary);
+
+        &:hover {
+          --btn-background-color: #ff781a;
+        }
+      }
+    }
+
+    &.#{$btn}--dark {
+      --btn-text-base: var(--text-base);
+      --btn-background-color: var(--btn-background-white);
+
+      border: 1px solid transparent;
+
+      &:hover {
+        --btn-background-color: #e1e1e1;
+      }
+    }
+  }
+
+  @mixin defaultLink() {
+    @include responsive((
+      '--link-font-size': (12px, v2(16), 16px, v4(24), 24px),
+    ));
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    font-size: var(--link-font-size);
+    line-height: unset;
+    border-radius: initial;
+
+    &:hover .#{$btn}__text {
+      text-decoration: var(--link-text-decoration);
+    }
+
+    &.#{$btn}--disabled {
+      --btn-text-base: var(--text-secondary);
+      --btn-background-color: transparent;
+
+      border: none;
+
+      &:hover .#{$btn}__text {
+        --link-text-decoration: none;
+      }
+    }
+
+    &.#{$btn}--highlight-pc {
+      @include responsive((
+        '--btn-text-base': (null, var(--text-primary), var(--text-primary), var(--text-primary), var(--text-primary)),
+      ));
+    }
+
+    &.#{$btn}--highlight-m {
+      @include mobile {
+        --btn-text-base: var(--text-primary);
+      }
+    }
+
+    &.#{$btn}--dark {
+      --btn-text-base: #fff;
+    }
+  }
+
+  display: inline-block;
+  padding: var(--btn-padding);
+  font-size: var(--btn-font-size);
+  color: var(--btn-text-base);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--btn-border-radius);
+  background-color: var(--btn-background-color);
+
+  $btn: 'mi-btn';
+
+  .#{$btn}__text {
+    @include ellipsisText(var(--btn-ellipsis-lines), var(--btn-ellipsis-direction));
+  }
+
+  &.#{$btn}--default {
+    @include defaultButton();
+  }
+
+  &.#{$btn}--primary {
+    @include primaryButton();
+  }
+
+  // 置灰状态
+  &:disabled,
+  &.#{$btn}--disabled {
+    --btn-text-base: var(--text-reverse);
+    --btn-background-color: var(--brand-grey-40);
+
+    border: 1px solid transparent;
+    cursor: not-allowed;
+
+    &:hover {
+      --btn-background-color: var(--brand-grey-40);
+      --btn-text-base: var(--text-reverse);
+
+      border-color: transparent;
+    }
+  }
+
+  &.#{$btn}--link {
+    @include defaultLink();
+  }
+
+  &.#{$btn}--arrow-pc,
+  &.#{$btn}--arrow-m {
+    .micon {
+      font-size: inherit;
+
+      @include ltrAndRtl(transform, null, rotate(180deg));
+    }
+  }
+
+  &.#{$btn}--arrow-pc {
+    .micon-link-arrow {
+      @include responsive((
+        'display': (null, inline-block, inline-block, inline-block, inline-block),
+      ));
+    }
+  }
+
+  &.#{$btn}--arrow-m {
+    .micon-link-arrow {
+      @include mobile {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.#{$btn}--icon {
+    @include responsive((
+      '--icon-font-size': (24px, 20px, v3(32), v4(32), 32px),
+    ));
+
+    --icon-background-color: transparent;
+
+    padding: 0;
+    background-color: var(--icon-background-color);
+
+    &:hover {
+      --btn-text-base: #444;
+    }
+
+    .micon {
+      font-size: var(--icon-font-size);
+    }
+
+    &.#{$btn}--disabled {
+      --btn-text-base: var(--text-secondary);
+
+      &:hover {
+        --btn-text-base: var(--text-secondary);
+      }
+    }
+
+    &.#{$btn}--highlight-pc {
+      @include responsive((
+        '--btn-text-base': (null, var(--text-primary), var(--text-primary), var(--text-primary), var(--text-primary)),
+      ));
+
+      &:hover {
+        @include responsive((
+          '--btn-text-base': (null, #ff781a, #ff781a, #ff781a, #ff781a),
+        ));
+      }
+    }
+
+    &.#{$btn}--highlight-m {
+      @include mobile {
+        --btn-text-base: var(--text-primary);
+      }
+
+      &:hover {
+        @include mobile {
+          --btn-text-base: #ff781a;
+        }
+      }
+    }
+
+    &.#{$btn}--dark {
+      --btn-text-base: var(--text-reverse);
+
+      border-color: var(--text-revers);
+
+      &:hover {
+        --btn-text-base: #e1e1e1;
+      }
+    }
+  }
+
+  &.#{$btn}--link-default {
+    @media screen and (max-width: 720px) {
+      @include defaultButton();
+
+      .micon-link-arrow {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 721px) {
+      @include defaultLink();
+    }
+  }
+
+  &.#{$btn}--default-link {
+    @media screen and (max-width: 720px) {
+      @include defaultLink();
+    }
+
+    @media screen and (min-width: 721px) {
+      @include defaultButton();
+
+      .micon-link-arrow {
+        display: none;
+      }
+    }
+  }
+
+  &.#{$btn}--link-primary {
+    @media screen and (max-width: 720px) {
+      @include primaryButton();
+
+      .micon-link-arrow {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 721px) {
+      @include defaultLink();
+    }
+  }
+
+  &.#{$btn}--primary-link {
+    @media screen and (max-width: 720px) {
+      @include defaultLink();
+    }
+
+    @media screen and (min-width: 721px) {
+      @include primaryButton();
+
+      .micon-link-arrow {
+        display: none;
+      }
+    }
+  }
+}

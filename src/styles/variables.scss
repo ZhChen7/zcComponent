@@ -1,0 +1,22 @@
+@import '@/src/styles/mixins.scss';
+
+body {
+  // 基本变量
+  @include responsive((
+    '--header-height': (48px, 48px, 48px, 56px, 56px),
+    '--store-max-width': (100%, 945px, 945px, 1260px, 1680px),
+    '--grid-gutter-width': (v1(8), v2(8), v3(16), v4(16), 16px),
+    '--grid--columns': (6, 12, 12, 12, 12),
+  ));
+
+  --grid-margin-small-special: var(--grid-gutter-width) 0;
+  --grid-margin-medium: var(--grid-gutter-width);
+
+  // grid margin枚举值
+  @include responsive((
+    '--grid-margin-small': (var(--grid-gutter-width) 0, 0, 0, 0, 0),
+    '--grid-margin-medium-special': (var(--grid-gutter-width) 0, var(--grid-gutter-width), var(--grid-gutter-width), var(--grid-gutter-width), var(--grid-gutter-width)),
+    '--grid-margin-large': (var(--grid-gutter-width), 32px, 48px, 64px, 80px),
+    '--grid-margin-large-special': (var(--grid-gutter-width) 0, 32px, 48px, 64px, 80px),
+  ));
+}

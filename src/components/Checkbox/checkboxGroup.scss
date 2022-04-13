@@ -1,0 +1,12 @@
+.mi-checkbox__group {
+  display: flex;
+  flex-wrap: wrap;
+
+  &--vertical {
+    flex-direction: column;
+
+    & .checkbox__custom {
+      margin-right: 0;
+    }
+  }
+}

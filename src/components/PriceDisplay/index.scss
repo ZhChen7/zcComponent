@@ -1,0 +1,26 @@
+.mi-price {
+  word-break: keep-all;
+
+  // 'FROM'元素
+  span {
+    font-weight: normal;
+  }
+
+  // 销售价
+  strong {
+    display: inline-block;
+    font-weight: normal;
+    white-space: nowrap;
+
+    // 金额符号
+    small {
+      font-size: inherit;
+    }
+  }
+
+  // 划线价
+  del {
+    font-style: normal;
+    white-space: nowrap;
+  }
+}

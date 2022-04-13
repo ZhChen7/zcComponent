@@ -1,0 +1,83 @@
+@import '../../styles/themes/light.css';
+@import '../../styles/mixins.scss';
+
+.mi-tag {
+  $prefixCls: 'mi-tag';
+
+  line-height: 0;
+
+  @include responsive((
+    '--margin-base': (0 v1(4), 0 v2(8), 0 v3(4), 0 v5(12), 0 12px),
+    'height': (v1(14), v2(24), v3(22), v5(32), 32px),
+    'line-height': (v1(14), v2(24), v3(22), v5(32), 32px),
+    'padding': (0 v1(3), 0 v2(4), 0 v3(8), 0 v5(16), 0 8px),
+    'font-size': (v1(10), v2(14), v3(12), v5(18), 18px),
+    'border-radius': (v1(3), v2(4), v3(4), v5(8), 8px),
+  ));
+
+  margin: var(--margin-base);
+
+  &:first-child {
+    @include responsive((
+      'margin-left': (0, 0, 0, 0, 0, 'ltr'),
+      'margin-right': (0, 0, 0, 0, 0, 'rtl'),
+    ));
+  }
+
+  &:last-child {
+    @include responsive((
+      'margin-left': (0, 0, 0, 0, 0, 'rtl'),
+      'margin-right': (0, 0, 0, 0, 0, 'ltr'),
+    ));
+  }
+
+  display: inline-flex;
+  white-space: nowrap;
+  background: var(--background-base);
+  border: 1px solid var(--border-base);
+  cursor: default;
+  opacity: 1;
+  box-sizing: border-box;
+
+  // 如果用户使用了width属性，那么会在指定的width属性实现超出打点...
+  &__text--ellipsis {
+    white-space: normal;
+
+    @include ellipsisText(1);
+  }
+
+  &--has-color {
+    border-color: transparent;
+    color: #fff;
+  }
+
+  &--orange {
+    border: 1px solid  var(--border-primary);
+    background-color: rgba(255, 105, 0, 0.1);
+    color: var(--border-primary);
+  }
+
+  &--green {
+    border: 1px solid  #50c050;
+    background-color: rgba(80, 192, 80, 0.1);
+    color: #50c050;
+  }
+
+  &--grey {
+    color: var(--text-secondary);
+    border: 1px solid #dedede;
+    background: #f4f4f4;
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  i {
+    @include responsive((
+      'font-size':(v1(10), v2(14), v3(12), v5(18), 18px),
+    ));
+
+    margin-right: 6px;
+  }
+}

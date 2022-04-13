@@ -1,0 +1,83 @@
+@import '@/src/styles/mixins.scss';
+
+.mi-switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  text-align: left;
+  line-height: 1;
+
+  @include responsive((
+    'width': (v1(40), v2(56), v5(80), v5(80), 80px),
+    'border-radius': (v1(7), v2(12), v5(16), v5(16), 16px)
+  ));
+
+  .mi-switch-checkbox {
+    display: none;
+  }
+
+  .mi-switch-label {
+    display: block;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .mi-switch-inner {
+    display: flex;
+    box-sizing: border-box;
+    background-color: var(--brand-grey-40);
+    align-items: center;
+
+    @include responsive((
+      'border-radius': (v1(7), v2(12), v5(16), v5(16), 16px),
+      'padding': (v1(2) v1(2) v1(2.5), v2(4), v5(5) v5(5) v5(5.5), v5(5) v5(5) v5(5.5), 5px),
+    ));
+  }
+
+  .mi-switch-disabled {
+    background-color: var(--background-disable);
+    cursor: not-allowed;
+
+    .mi-switch-disabled::before {
+      background-color: var(--background-disable);
+      cursor: not-allowed;
+    }
+  }
+
+  .mi-switch-inner::after {
+    content: '';
+    text-transform: uppercase;
+    background-color: var(--brand-grey-40);
+    color: var(--text-reverse);
+  }
+
+  .mi-switch-block {
+    display: block;
+    color: var(--text-reverse);
+    transition: all 0.3s ease-in 0s;
+    box-sizing: border-box;
+    object-fit: cover;
+    clip-path: url('#svgClipPath');
+    background-color: var(--background-white);
+    overflow: hidden;
+
+    @include responsive((
+      'height': (v1(16), v2(25), v5(30), v5(30), 30px),
+      'width': (v1(16), v2(25), v5(30), v5(30), 30px),
+      'transform': (translateX(v1(1)), translateX(v5(0)), translateX(v5(0)), translateX(v5(0)), translateX(0)),
+    ));
+  }
+
+  .mi-switch-checkbox:checked + .mi-switch-label {
+    .mi-switch-inner {
+      background-color: var(--background-primary);
+    }
+
+    .mi-switch-block {
+      @include responsive((
+        'transform': (translateX(v1(20)), translateX(v2(23)), translateX(v5(40)), translateX(v5(40)), translateX(40px)),
+      ));
+    }
+  }
+}

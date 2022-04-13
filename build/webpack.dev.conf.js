@@ -44,14 +44,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       // // 自定义 option 在 html 中 使用 <%= htmlWebpackPlugin.options.external %> 调用
       // external: config.build.externalData(replaceLocal),
       // 压缩
-      // minify: {
-      //   minifyJS: true, // 压缩 HTML 中的 JS
-      //   minifyCSS: true, // 压缩 HTML 中的 CSS
-      //   removeComments: true, // 移除注释
-      //   collapseWhitespace: true, // 去除空格
-      //   // removeEmptyAttributes: true // 去除空属性
-      //   // preserveLineBreaks: true, // 标签分行
-      // }
+      minify: {
+        minifyJS: true, // 压缩 HTML 中的 JS
+        minifyCSS: true, // 压缩 HTML 中的 CSS
+        removeComments: true, // 移除注释
+        collapseWhitespace: true, // 去除空格
+        removeEmptyAttributes: true, // 去除空属性
+        preserveLineBreaks: true // 标签分行
+      }
     })
   ],
   devServer: {
@@ -60,6 +60,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     },
     hot: true,
     host: '127.0.0.1',
+    open: true,
     // firewall: false,
     compress: true,
     port: 3000,

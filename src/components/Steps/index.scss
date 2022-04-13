@@ -1,0 +1,21 @@
+@import '@/src/styles/mixins.scss';
+
+.steps-defaul {
+  color: var(--background-white);
+  border: 1px solid var(--border-primary);
+}
+
+.components-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.components-steps .steps-box:first-child div .steps-icon .line:first-child {
+  visibility: hidden;
+}
+
+.components-steps .steps-box:last-child div .steps-icon .line:last-child {
+  visibility: hidden;
+}

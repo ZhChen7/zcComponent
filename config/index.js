@@ -1,35 +1,26 @@
-const variable = require('./variable')
+const {
+  NODE_ENV,
+  TAG_ENVIRONMENT,
+  ANALYZER,
+  npm_package_version,
+} = process.env
 
-// 发npm包时不同环境对应的不同路径
-const distPathMap = {
-  test: 'test',
-  pre: 'preonline',
-  pro: 'release'
-}
+const tagEnv = TAG_ENVIRONMENT || 'test'
 
 module.exports = {
   dev: {
     host: '127.0.0.1',
-    port: '3000',
-    entryList: variable.localList,
+    port: '3001',
   },
   prod: {
-    host: 'auto',
-    // host: variable.isSsrMode ? '${obj.resourceJsUrl}/' : variable.siteHost,
+    host: `//cnbj1.fds.api.xiaomi.com/store-mi-web/${tagEnv}/`,
   },
   build: {
-    environment: variable.environment,
+    environment: tagEnv,
     assetsRoot: `assets`,
-    distPath: variable.isSsrMode ? `./lib/dist/${distPathMap[variable.environment]}` : `./dist`,
-    distManifestPath: variable.isSsrMode ? `./lib/dist/${distPathMap[variable.environment]}/pwa` : variable.isPwaMode ? `./dist` : `./dist/pwa`,
-    externalData,
-    pwaManifest,
-    fileHost: variable.isPwaMode ? variable.siteHost : variable.isSsrMode ? '${obj.resourceJsUrl}' : '',
-    pwaBaseUrl: variable.siteHost,
-    packageVersion: variable.packageVersion,
-    isAnalyzer: variable.isAnalyzer,
-    isSsrMode: variable.isSsrMode,
-    isPwaMode: variable.isPwaMode,
-    isDevelopment: variable.isDevelopment,
+    distPath: `./opx/${tagEnv}`,
+    packageVersion: npm_package_version,
+    isAnalyzer: ANALYZER === 'true',
+    isDevelopment: NODE_ENV === 'development',
   }
 }
