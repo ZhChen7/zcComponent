@@ -1,6 +1,4 @@
 export * from './hooks' // Hooks工具包
-export * from './stat' // 数据埋点工具包
-
 export {
   priceFormat,
   numberFormat,
@@ -20,27 +18,6 @@ export {
   isInsideAndroid,
   isInsideIos,
 } from './tools/checkDeviceType'
-
-// 版本选择工具包
-export {
-  getGoodsPrice,
-  getActivityType,
-  getActivityIdList,
-  getActivityById,
-  checkOutOfStock,
-} from './buyProduct'
-
-// 分享功能函数
-export {
-  shareFacebook,
-  shareTwitter,
-  shareVk,
-  shareWhatsApp,
-  shareTelegram,
-  shareLine,
-  shareWeibo,
-  copyToClipboard
-} from './shareCore'
 
 export {
   outputLogo,
@@ -66,5 +43,4 @@ export {
 export { getBrowserUrl } from './tools/getBrowserUrl'
 export * from './tools/type'
 export * from './tools/omit'
-export * from './tools/appWebView'
 export { getUserAgentInfo } from './tools/getUserAgentInfo'

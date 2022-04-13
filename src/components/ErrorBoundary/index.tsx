@@ -3,7 +3,6 @@ import { Component } from 'react'
 
 // utils
 import {
-  sendErrorLog,
   useIntl,
   useScmConfig,
 } from '@/src/utils'
@@ -31,7 +30,7 @@ class ErrorBoundaryPure extends Component<ErrorBoundaryPureProps, ErrorBoundaryS
 
     // !!window.Sentry && window.Sentry.captureException(error, { extra: info })
 
-    return sendErrorLog(this.props.config, error)
+    return <></>
   }
 
   render () {
