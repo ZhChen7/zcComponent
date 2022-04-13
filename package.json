@@ -3,7 +3,7 @@
   "version": "1.0.1-alpha.0",
   "title": "Ant Design",
   "description": "> TS - UI组件库",
-    "keywords": [
+  "keywords": [
     "UI",
     "React",
     "zcCom",
@@ -43,6 +43,7 @@
     "@types/react-redux": "^7.1.23",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
+    "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "eslint": "^8.13.0",
@@ -65,9 +66,9 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.dev.conf.js",
+    "build": "cross-env NODE_ENV=production compile_mode=build webpack --config ./build/webpack.dev.conf.js",
     "analyzer": "cross-env Analyzer=on npm run build && webpack-bundle-analyzer --port 8888 ./dist/analyzer.json",
-    "npm:publish":"npm run build && npm publish"
+    "npm:publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",

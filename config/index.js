@@ -1,9 +1,12 @@
 const {
   NODE_ENV,
+  compile_mode,
   TAG_ENVIRONMENT,
   ANALYZER,
   npm_package_version,
 } = process.env
+
+console.log('compile_mode', compile_mode);
 
 const tagEnv = TAG_ENVIRONMENT || 'test'
 

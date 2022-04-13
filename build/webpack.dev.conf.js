@@ -3,16 +3,17 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   output: {
-    path: path.resolve('./dist'),
-    filename: 'js/[name].js?[fullhash:8]',
-    chunkFilename: 'js/[name].chunk.js?[fullhash:8]',
+    path: path.resolve(__dirname,'../dist'),
+    filename: '[name].[hash:4].js?[fullhash:8]',
+    chunkFilename: '[name].[hash:4].chunk.js?[fullhash:8]',
     publicPath: '/'
   },
-  cache: true,
+  // cache: true,
   devtool: 'source-map',
   module: {
     rules: [
@@ -52,7 +53,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         removeEmptyAttributes: true, // 去除空属性
         preserveLineBreaks: true // 标签分行
       }
-    })
+    }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     // contentBase: path.join(__dirname, '../src/'),

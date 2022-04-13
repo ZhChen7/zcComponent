@@ -4,8 +4,20 @@ const PostcssCustomProperties = require('postcss-custom-properties')
 const PostcssPresetEnv = require('postcss-preset-env')
 const PostcssFlexbugsFixes = require('postcss-flexbugs-fixes')
 
+const {
+  NODE_ENV,
+  compile_mode,
+  TAG_ENVIRONMENT,
+  ANALYZER,
+  npm_package_version,
+} = process.env
+
+console.log('compile_mode1', compile_mode);
+
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index'),
+  entry: {
+    index: compile_mode === 'build' ? path.resolve(__dirname, '../src/components/index.tsx')  : path.resolve(__dirname, '../src/index')
+  },
   resolve: {
     alias: {
       '@/src': path.resolve(__dirname, '../src'),
